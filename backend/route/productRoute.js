@@ -6,7 +6,7 @@ import Product from "../models/product.model.js";
 
 const router = express.Router();
 
-router.get("", async(req,res) => {
+router.get("/", async(req,res) => {
     try {
         const products = await Product.find({});
         res.status(200).json({ success: true, data: products }); 
@@ -17,7 +17,7 @@ router.get("", async(req,res) => {
 })
 
 
-router.post("", async(req,res) => {
+router.post("/", async(req,res) => {
     const product = req.body; // this is the product that we want to create
 
     if (!product.name || !product.price || !product.image) {
@@ -40,7 +40,7 @@ router.put("/:id", async(req,res) => {
 
     const product = req.body; // this is the product that we want to update
 
-    if (!mongooseg.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ success: false, message: "Product not found" });
     }
 
